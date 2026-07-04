@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Asset Review — DeFi, Layer 2s, and Digital Asset Analysis</title>
+<meta name="description" content="Independent reviews of DeFi protocols, Layer 2 solutions, NFT platforms, stablecoins, bridges, and real-world assets. In-depth analysis for informed investors.">
+<meta name="keywords" content="defi review, layer 2, arbitrum, optimism, nft platforms, stablecoin comparison, bridge protocols, real world assets, rwa crypto">
+<meta property="og:title" content="Digital Asset Review — DeFi, Layer 2s, and Digital Asset Analysis">
+<meta property="og:description" content="Independent reviews of DeFi protocols, Layer 2 solutions, NFT platforms, stablecoins, bridges, and real-world assets. In-depth analysis for informed investors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://digitalassetreview.io">
+<link rel="canonical" href="https://digitalassetreview.io">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --text: #e8e8e8;
+  --text-secondary: #aaaaaa;
+  --text-muted: #888888;
+  --accent: var(--site-accent, #2563eb);
+  --accent-light: var(--site-accent-light, #1a3a6b);
+  --accent-dark: var(--site-accent-dark, #1e40af);
+  --border: #222222;
+  --max-w: 820px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.nav-updated {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ── Hero ── */
+.hero {
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.hero-sub {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* ── Sections ── */
+.section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+/* ── Intro ── */
+.section--intro {
+  padding: 3.5rem 0;
+}
+
+.intro-copy {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+/* ── Topic Cards ── */
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.topic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1.75rem 1.5rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 0 1.25rem;
+}
+
+.topic-card + .topic-card {
+  border-top: none;
+}
+
+.topic-card:hover {
+  border-color: var(--accent);
+  background: #141414;
+}
+
+.topic-number {
+  grid-row: 1 / 3;
+  grid-column: 1;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  line-height: 1;
+  padding-top: 0.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.topic-card:hover .topic-number {
+  color: var(--accent);
+}
+
+.topic-header {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.topic-icon {
+  display: none;
+}
+
+.topic-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.topic-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.topic-body {
+  grid-column: 2;
+}
+
+.topic-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.topic-points {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.topic-points li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 3px 0 3px 1.25rem;
+  position: relative;
+}
+
+.topic-points li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.topic-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.topic-link::after {
+  content: '\2197';
+  font-size: 0.9em;
+}
+
+/* ── Guide ── */
+.guide-body {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.95rem;
+}
+
+.guide-body h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.guide-body h3:first-child {
+  margin-top: 0;
+}
+
+.guide-body p {
+  margin-bottom: 1rem;
+}
+
+.guide-body ul,
+.guide-body ol {
+  margin: 0.5rem 0 1rem 1.25rem;
+}
+
+.guide-body li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Resources ── */
+.resources-body {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.95rem;
+}
+
+.resources-body h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.resources-body h3:first-child {
+  margin-top: 0;
+}
+
+.resources-body p {
+  margin-bottom: 1rem;
+}
+
+.resources-body a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.resources-body a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--accent);
+}
+
+.resources-body ul,
+.resources-body ol {
+  margin: 0.5rem 0 1rem 1.25rem;
+}
+
+.resources-body li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── FAQ ── */
+.faq-list {
+  border-top: 1px solid var(--border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 1.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+  gap: 1rem;
+  line-height: 1.4;
+}
+
+.faq-q::after {
+  content: '+';
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.faq-q:hover::after {
+  color: var(--accent);
+}
+
+.faq-q.open::after { content: '\2212'; }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-a.open {
+  max-height: 600px;
+  padding-bottom: 1.25rem;
+}
+
+.faq-a p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ── Footer ── */
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-top {
+  padding: 3rem 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.footer-disclaimer {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-links-heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  padding: 1.25rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.footer-bottom p {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  .topic-card {
+    grid-template-columns: 2.25rem 1fr;
+    gap: 0 1rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .topic-number {
+    font-size: 1.25rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Digital Asset Review</a>
+    <span class="nav-updated">Updated July 2026</span>
+  </div>
+</nav>
+<span class="logo-icon" style="display:none" aria-hidden="true">📊</span>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">Reviews you can actually trust</h1>
+    <p class="hero-sub">Independent, technical analysis of DeFi protocols, Layer 2 solutions, NFT platforms, and emerging digital asset categories — no sponsored content, no token bags.</p>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="section section--intro">
+    <div class="section-inner">
+      <p class="intro-copy">The digital asset space moves at breakneck speed. New protocols launch daily, Layer 2s compete for dominance, and entirely new asset categories like RWAs are emerging. We cut through the noise with independent, technically grounded reviews that help you understand what these protocols actually do, how they compare, and where the real risks lie.</p>
+    </div>
+  </section>
+
+  <section class="section section--topics" id="topics">
+    <div class="section-inner">
+      <span class="section-label">Explore</span>
+      <h2 class="section-heading">Latest reviews</h2>
+      <div class="topic-list">
+        <div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🏛️</span>
+    <span class="topic-name">DeFi Protocols (Aave, Uniswap)</span>
+    <span class="topic-tag">DeFi</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">The two pillars of decentralized finance. Aave dominates lending with over $20B in deposits, while Uniswap pioneered automated market making and still processes the most DEX volume. We compare their architectures, fee models, and risk profiles.</p>
+    <ul class="topic-points">
+      Aave V3 multi-chain lending analysis,Uniswap V4 hooks and concentrated liquidity,Fee structures and revenue comparison,Smart contract audit history,Governance and token utility breakdown
+    </ul>
+    <a href="#affiliate-defi-protocols" class="topic-link" target="_blank" rel="noopener nofollow">Read DeFi review</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🔗</span>
+    <span class="topic-name">Layer 2s (Arbitrum, Optimism)</span>
+    <span class="topic-tag">Infrastructure</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Layer 2 rollups are scaling Ethereum by processing transactions off-chain while inheriting its security. Arbitrum and Optimism lead the space, but they take fundamentally different approaches to fraud proofs, governance, and ecosystem development.</p>
+    <ul class="topic-points">
+      Optimistic rollup architecture compared,Arbitrum Nitro vs. OP Stack technical deep dive,Fee savings vs. Ethereum mainnet,Decentralization progress and sequencer risk,Ecosystem and developer adoption metrics
+    </ul>
+    <a href="#affiliate-layer2-review" class="topic-link" target="_blank" rel="noopener nofollow">Read L2 review</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🎨</span>
+    <span class="topic-name">NFT Platforms</span>
+    <span class="topic-tag">Digital Collectibles</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">The NFT market has evolved far beyond profile pictures. We review the leading platforms for buying, selling, and creating NFTs — comparing fees, creator tools, royalty enforcement, and chain support.</p>
+    <ul class="topic-points">
+      Marketplace fee and royalty comparisons,Creator tools and minting platforms,Cross-chain NFT support,On-chain vs. off-chain metadata storage,Market volume and liquidity analysis
+    </ul>
+    <a href="#affiliate-nft-platforms" class="topic-link" target="_blank" rel="noopener nofollow">Read NFT review</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">💵</span>
+    <span class="topic-name">Stablecoin Comparison</span>
+    <span class="topic-tag">Stablecoins</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Stablecoins are the backbone of DeFi, but they're not all created equal. We compare USDT, USDC, DAI, and newer entrants on reserves transparency, peg stability, regulatory status, and decentralization.</p>
+    <ul class="topic-points">
+      Reserve backing and audit transparency,Peg stability during market stress,Regulatory status by jurisdiction,Centralized vs. algorithmic vs. CDP models,Integration across DeFi protocols
+    </ul>
+    <a href="#affiliate-stablecoins" class="topic-link" target="_blank" rel="noopener nofollow">Read stablecoin review</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🌉</span>
+    <span class="topic-name">Bridge Protocols</span>
+    <span class="topic-tag">Cross-Chain</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Bridges let you move assets between blockchains, but they've been the source of billions in hacks. We analyze leading bridge protocols on security architecture, supported chains, fees, and historical track record.</p>
+    <ul class="topic-points">
+      Security architecture comparisons,Hack history and post-mortem analysis,Supported chains and asset coverage,Fee and speed benchmarks,Trust assumptions and verification methods
+    </ul>
+    <a href="#affiliate-bridge-protocols" class="topic-link" target="_blank" rel="noopener nofollow">Read bridge review</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🏢</span>
+    <span class="topic-name">Real World Assets (RWA)</span>
+    <span class="topic-tag">RWA</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Tokenizing real-world assets — treasuries, real estate, commodities, private credit — is one of the fastest-growing sectors in crypto. We review the platforms and protocols bringing traditional assets on-chain.</p>
+    <ul class="topic-points">
+      Treasury tokenization (Ondo, Backed),On-chain private credit markets,Real estate tokenization platforms,Regulatory framework and compliance,Institutional adoption and TVL growth
+    </ul>
+    <a href="#affiliate-rwa-review" class="topic-link" target="_blank" rel="noopener nofollow">Read RWA review</a>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--guide" id="guide">
+    <div class="section-inner">
+      <span class="section-label">Guide</span>
+      <h2 class="section-heading">How we evaluate digital assets</h2>
+      <div class="guide-body"><h3>Technical architecture</h3><p>We examine the underlying technology — consensus mechanisms, smart contract design, security audits, and code quality. A protocol is only as strong as its foundation.</p><h3>Team and governance</h3><p>Who built it, who controls it, and how are decisions made? We look at team backgrounds, token distribution, DAO governance participation, and treasury management.</p><h3>Adoption metrics</h3><p>Real usage matters more than market cap. We track TVL, daily active users, transaction volume, and developer activity to separate genuine traction from vapor.</p><h3>Risk assessment</h3><p>Every protocol has risks. We identify smart contract risks, centralization vectors, regulatory exposure, and economic attack surfaces so you can make informed decisions.</p></div>
+    </div>
+  </section>
+
+  <section class="section section--resources" id="resources">
+    <div class="section-inner">
+      <span class="section-label">Resources</span>
+      <h2 class="section-heading">Analysis tools</h2>
+      <div class="resources-body"><h3>DeFi Llama</h3><p>The gold standard for DeFi analytics. Track TVL, yields, stablecoin flows, and protocol comparisons across every chain. <a href="https://defillama.com" target="_blank" rel="noopener">Visit DeFi Llama</a></p><h3>L2Beat</h3><p>The definitive resource for Layer 2 analysis. Detailed risk assessments, TVL tracking, and technical breakdowns of every rollup and validium. <a href="https://l2beat.com" target="_blank" rel="noopener">Visit L2Beat</a></p><h3>Dune Analytics</h3><p>Community-built dashboards with on-chain data for virtually every protocol. Create your own queries or explore thousands of existing analyses. <a href="https://dune.com" target="_blank" rel="noopener">Visit Dune Analytics</a></p></div>
+    </div>
+  </section>
+
+  <section class="section section--faq" id="faq">
+    <div class="section-inner">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-heading">Frequently asked questions</h2>
+      <div class="faq-list" id="faq-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-name">Digital Asset Review</span>
+        <p class="footer-disclaimer">DigitalAssetReview.io provides independent analysis of digital asset protocols. This is not financial advice. Always do your own research. We may earn commissions through affiliate links.</p>
+      </div>
+      <div class="footer-links">
+        <span class="footer-links-heading">More resources</span>
+        <a href="https://sepehr.ai" target="_blank" rel="noopener">sepehr.ai</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Digital Asset Review. All rights reserved. Some links on this site are affiliate links. We may earn a commission if you make a purchase at no extra cost to you.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SITE_CONFIG = {"faqs":[{"q":"How do you ensure reviews are independent?","a":"We do not accept payment for reviews, hold tokens of protocols we review during the analysis period, or allow protocols to preview our findings. Revenue comes from affiliate links to exchanges and tools, not from the projects themselves."},{"q":"How often are reviews updated?","a":"We update reviews when significant changes occur — major protocol upgrades, security incidents, governance changes, or market shifts. Each review shows its last-updated date so you know how current the analysis is."},{"q":"Should I invest based on these reviews?","a":"No. Our reviews are educational analysis, not financial advice. Use them as one input in your own research process. We identify strengths and risks, but your investment decisions should factor in your personal risk tolerance, portfolio allocation, and financial situation."},{"q":"Why don't you cover every protocol?","a":"We focus on protocols with significant TVL, active development, and meaningful adoption. Covering everything would dilute quality. If a protocol you're interested in isn't listed, it may not yet meet our coverage threshold — or it may be in our pipeline."},{"q":"What does TVL mean and why does it matter?","a":"Total Value Locked (TVL) measures how much capital is deposited in a DeFi protocol. It's a rough proxy for trust and adoption — if people are willing to lock significant funds in a smart contract, it suggests confidence in the protocol's security and utility."}],"accentColor":"#0891b2","accentLight":"#cffafe","accentDark":"#0e7490","ctaText":""};
+document.addEventListener('DOMContentLoaded', () => {
+  // Accent color
+  if (SITE_CONFIG.accentColor) {
+    document.documentElement.style.setProperty('--site-accent', SITE_CONFIG.accentColor);
+    document.documentElement.style.setProperty('--site-accent-light', SITE_CONFIG.accentLight || SITE_CONFIG.accentColor + '22');
+    document.documentElement.style.setProperty('--site-accent-dark', SITE_CONFIG.accentDark || SITE_CONFIG.accentColor);
+  }
+
+  // Number the topic cards
+  const cards = document.querySelectorAll('.topic-card');
+  cards.forEach((card, i) => {
+    const num = card.querySelector('.topic-number');
+    if (num) {
+      num.textContent = String(i + 1).padStart(2, '0');
+    }
+  });
+
+  // FAQ accordion
+  const faqList = document.getElementById('faq-list');
+  if (SITE_CONFIG.faqs && faqList) {
+    SITE_CONFIG.faqs.forEach(faq => {
+      const item = document.createElement('div');
+      item.className = 'faq-item';
+      item.innerHTML = `
+        <button class="faq-q">${faq.q}</button>
+        <div class="faq-a"><p>${faq.a}</p></div>
+      `;
+      const btn = item.querySelector('.faq-q');
+      const answer = item.querySelector('.faq-a');
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('open');
+        answer.classList.toggle('open');
+      });
+      faqList.appendChild(item);
+    });
+  }
+
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.style.borderBottomColor = '#333';
+      } else {
+        nav.style.borderBottomColor = '';
+      }
+    }, { passive: true });
+  }
+});
+
+
+</script>
+</body>
+</html>
